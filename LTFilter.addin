@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RevitAddIns>
+
+  <AddIn Type="Command">
+
+    <Text>LTFilter</Text>
+
+    <Description>Enables filtering of lower taxonomies.</Description>
+
+    <Assembly>LTFilter\LTFilter.dll</Assembly>
+
+    <AddInId>fd0429fe-bb21-4a5e-9575-37b345e3e031</AddInId>
+
+    <FullClassName>LTFilter.Command</FullClassName>
+
+    <VendorId>com.zacharymathews</VendorId>
+
+    <VendorDescription>Zachary Mathews, zacharymathews.com</VendorDescription>
+
+    <Discipline>Any</Discipline>
+
+    <VisibilityMode>NotVisibleWhenNoActiveDocument</VisibilityMode>
+
+  </AddIn>
+
+</RevitAddIns>

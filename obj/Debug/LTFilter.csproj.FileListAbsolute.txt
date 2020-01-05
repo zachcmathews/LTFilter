@@ -1,0 +1,7 @@
+C:\Users\Zach\source\repos\LTFilter\obj\Debug\LTFilter.csprojAssemblyReference.cache
+C:\Users\Zach\source\repos\LTFilter\obj\Debug\LTFilter.FilterForm.resources
+C:\Users\Zach\source\repos\LTFilter\obj\Debug\LTFilter.csproj.GenerateResource.cache
+C:\Users\Zach\source\repos\LTFilter\bin\Debug\LTFilter.dll
+C:\Users\Zach\source\repos\LTFilter\bin\Debug\LTFilter.pdb
+C:\Users\Zach\source\repos\LTFilter\obj\Debug\LTFilter.dll
+C:\Users\Zach\source\repos\LTFilter\obj\Debug\LTFilter.pdb
