@@ -11,7 +11,7 @@ namespace LTFilter
     {
         private readonly Command filter;
 
-        public FilterForm(Command filter, AvailableFilters availableFilters)
+        public FilterForm(Command filter, Filters availableFilters)
         {
             InitializeComponent();
             this.filter = filter;
@@ -52,7 +52,7 @@ namespace LTFilter
             List<string> filteredList = categoriesCheckedListBox.CheckedItems.OfType<string>().ToList();
             if (filteredList.Count > 0)
             {
-                AvailableFilters availableFilters = filter.applyFilter(Tabs.categories, filteredList);
+                Filters availableFilters = filter.applyFilter(Tabs.categories, filteredList);
                 drawForm(availableFilters);
             }
         }
@@ -62,7 +62,7 @@ namespace LTFilter
             List<string> filteredList = familiesCheckedListBox.CheckedItems.OfType<string>().ToList();
             if (filteredList.Count > 0)
             {
-                AvailableFilters availableFilters = filter.applyFilter(Tabs.families, filteredList);
+                Filters availableFilters = filter.applyFilter(Tabs.families, filteredList);
                 drawForm(availableFilters);
             }
 
@@ -73,7 +73,7 @@ namespace LTFilter
             List<string> filteredList = typesCheckedListBox.CheckedItems.OfType<string>().ToList();
             if (filteredList.Count > 0)
             {
-                AvailableFilters availableFilters = filter.applyFilter(Tabs.types, filteredList);
+                Filters availableFilters = filter.applyFilter(Tabs.types, filteredList);
                 drawForm(availableFilters);
             }
         }
@@ -83,12 +83,12 @@ namespace LTFilter
             List<string> filteredList = worksetsCheckedListBox.CheckedItems.OfType<string>().ToList();
             if (filteredList.Count > 0)
             {
-                AvailableFilters availableFilters = filter.applyFilter(Tabs.worksets, filteredList);
+                Filters availableFilters = filter.applyFilter(Tabs.worksets, filteredList);
                 drawForm(availableFilters);
             }
         }
 
-        private void drawForm(AvailableFilters availableFilters)
+        private void drawForm(Filters availableFilters)
         {
             // Clear the checklist
             categoriesCheckedListBox.Items.Clear();
@@ -105,7 +105,7 @@ namespace LTFilter
 
         private void clearTabButton_Click(object sender, EventArgs e)
         {
-            AvailableFilters availableFilters = new AvailableFilters();
+            Filters availableFilters = new Filters();
             if (categoriesTab == tabControl.SelectedTab)
             {
                 availableFilters = filter.clearFilter(Tabs.categories);
@@ -130,7 +130,7 @@ namespace LTFilter
 
         private void clearAllButton_Click(object sender, EventArgs e)
         {
-            AvailableFilters availableFilters = filter.clearFilter(Tabs.all);
+            Filters availableFilters = filter.clearFilter(Tabs.all);
             drawForm(availableFilters);
         }
     }

@@ -17,7 +17,7 @@ namespace LTFilter
         public string type;
         public string workset;
     }
-    public struct AvailableFilters
+    public struct Filters
     {
         public List<string> categories;
         public List<string> families;
@@ -31,7 +31,9 @@ namespace LTFilter
     {
         private List<FilterableElement> allElements;
         private List<FilterableElement> filteredElements;
-        private AvailableFilters availableFilters;
+        private Filters allFilters;
+        private Filters availableFilters;
+        private Filters selectedFilters;
 
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
@@ -59,6 +61,8 @@ namespace LTFilter
 
             // Determine the values we can filter
             determineAvailableFilters();
+            allFilters = availableFilters;
+            selectedFilters = availableFilters;
 
             // Show the form
             FilterForm filterForm = new FilterForm(this, availableFilters);
@@ -74,83 +78,83 @@ namespace LTFilter
             return Result.Succeeded;
         }
 
-        public AvailableFilters applyFilter(Tabs tab, List<string> filteredList)
+        public Filters applyFilter(Tabs tab, List<string> filteredList)
         {
             // Filter out the elements not matching the filter
             if (Tabs.categories == tab)
             {
-                filteredElements = filteredElements
-                    .Where(filterableElement => filteredList.Contains(filterableElement.category))
-                    .ToList();
+                selectedFilters.categories = filteredList;
             }
             else if (Tabs.families == tab)
             {
-                filteredElements = filteredElements
-                    .Where(filterableElement => filteredList.Contains(filterableElement.family))
-                    .ToList();
+                selectedFilters.families = filteredList;
             }
             else if (Tabs.types == tab)
             {
-                filteredElements = filteredElements
-                    .Where(filterableElement => filteredList.Contains(filterableElement.type))
-                    .ToList();
+                selectedFilters.types = filteredList;
             }
             else if (Tabs.worksets == tab)
             {
-                filteredElements = filteredElements
-                    .Where(filterableElement => filteredList.Contains(filterableElement.workset))
-                    .ToList();
+                selectedFilters.worksets = filteredList;
             }
+            filterElements();
 
-            // Update the available filters and return
+            // Return the available filters
             determineAvailableFilters();
             return availableFilters;
         }
 
-        public AvailableFilters clearFilter(Tabs tab)
+        public Filters clearFilter(Tabs tab)
         {
             if (Tabs.all == tab)
             {
                 // Clear all filters
-                filteredElements = allElements;
+                selectedFilters = allFilters;
             }
             else if (Tabs.categories == tab)
             {
                 // Clear category, family, and type filters
-                filteredElements = allElements
-                    .Where(filterableElement => availableFilters.worksets.Contains(filterableElement.workset))
-                    .ToList();
+                selectedFilters.categories = allFilters.categories;
+                selectedFilters.families = allFilters.families;
+                selectedFilters.types = allFilters.types;
             }
             else if (Tabs.families == tab)
             {
                 // Clear family and type filters
-                filteredElements = allElements
-                    .Where(filterableElement => availableFilters.categories.Contains(filterableElement.category) && availableFilters.worksets.Contains(filterableElement.workset))
-                    .ToList();
+                selectedFilters.families = allFilters.families;
+                selectedFilters.types = allFilters.types;
             }
             else if (Tabs.types == tab)
             {
                 // Clear type filter
-                filteredElements = allElements
-                    .Where(filterableElement => availableFilters.families.Contains(filterableElement.family) && availableFilters.worksets.Contains(filterableElement.workset))
-                    .ToList();
+                selectedFilters.types = allFilters.types;
             }
             else if (Tabs.worksets == tab)
             {
                 // Clear workset filter
-                filteredElements = allElements
-                    .Where(filterableElement => availableFilters.types.Contains(filterableElement.type))
-                    .ToList();
+                selectedFilters.categories = allFilters.categories;
             }
+            filterElements();
 
-            // Update the available filters and return
+            // Return the available filters
             determineAvailableFilters();
             return availableFilters;
         }
 
+        private void filterElements()
+        {
+            filteredElements = allElements.Where(filterableElement => {
+                bool categoryMatches = selectedFilters.categories.Contains(filterableElement.category);
+                bool familyMatches = selectedFilters.families.Contains(filterableElement.family);
+                bool typeMatches = selectedFilters.types.Contains(filterableElement.type);
+                bool worksetMatches = selectedFilters.worksets.Contains(filterableElement.workset);
+
+                return categoryMatches && familyMatches && typeMatches && worksetMatches;
+            }).ToList();
+        }
+
         private void determineAvailableFilters()
         {
-            // Determine the values we can filter
             availableFilters.categories = filteredElements
                 .Select(filterableElement => filterableElement.category)
                 .Distinct()

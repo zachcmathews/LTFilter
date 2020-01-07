@@ -5,3 +5,10 @@ C:\Users\Zach\source\repos\LTFilter\bin\Debug\LTFilter.dll
 C:\Users\Zach\source\repos\LTFilter\bin\Debug\LTFilter.pdb
 C:\Users\Zach\source\repos\LTFilter\obj\Debug\LTFilter.dll
 C:\Users\Zach\source\repos\LTFilter\obj\Debug\LTFilter.pdb
+C:\Users\zacha\source\repos\LTFilter\bin\Debug\LTFilter.dll
+C:\Users\zacha\source\repos\LTFilter\bin\Debug\LTFilter.pdb
+C:\Users\zacha\source\repos\LTFilter\obj\Debug\LTFilter.csprojAssemblyReference.cache
+C:\Users\zacha\source\repos\LTFilter\obj\Debug\LTFilter.FilterForm.resources
+C:\Users\zacha\source\repos\LTFilter\obj\Debug\LTFilter.csproj.GenerateResource.cache
+C:\Users\zacha\source\repos\LTFilter\obj\Debug\LTFilter.dll
+C:\Users\zacha\source\repos\LTFilter\obj\Debug\LTFilter.pdb
