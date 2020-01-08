@@ -132,7 +132,7 @@ namespace LTFilter
             else if (Tabs.worksets == tab)
             {
                 // Clear workset filter
-                selectedFilters.categories = allFilters.categories;
+                selectedFilters.worksets = allFilters.worksets;
             }
             filterElements();
 
